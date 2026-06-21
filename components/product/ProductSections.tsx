@@ -29,7 +29,7 @@ function ListingCard({ listing }: { listing: EnrichedListing }) {
       </div>
       <div className="flex items-center gap-4 sm:text-right">
         <div>
-          <p className="text-lg font-bold gradient-text">{formatPrice(listing.price)}</p>
+          <p className="text-lg font-bold text-primary">{formatPrice(listing.price)}</p>
           <StockBadge status={listing.stockStatus} />
         </div>
         <button className="rounded-md fb-primary px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90">Contact Vendor</button>
