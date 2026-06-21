@@ -4,18 +4,14 @@ import Link from "next/link";
 import { useState } from "react";
 import {
   Menu, X, User, Store, GitCompare, BookOpen, Grid3X3,
-  Smartphone, Car, Wind, Bike, Shirt, Home, Wrench,
 } from "lucide-react";
 import { SearchBar } from "./SearchBar";
 import { Button } from "@/components/ui/Button";
 import { getTopCategories } from "@/lib/mock/categories";
-
-const iconMap: Record<string, React.ElementType> = {
-  Smartphone, Car, Wind, Bike, Shirt, Home, Wrench, Grid3X3,
-};
+import { getCategoryIcon } from "@/lib/category-icons";
 
 function CategoryIcon({ name }: { name: string }) {
-  const Icon = iconMap[name] ?? Grid3X3;
+  const Icon = getCategoryIcon(name);
   return <Icon className="h-5 w-5" />;
 }
 
@@ -49,7 +45,8 @@ export function Header() {
           </button>
           {megaOpen && (
             <div className="absolute left-0 top-full pt-1">
-              <div className="grid w-[520px] grid-cols-2 gap-1 rounded-lg border border-[#dadde1] bg-white p-2 shadow-lg">
+              <div className="max-h-[70vh] w-[560px] overflow-y-auto rounded-lg border border-[#dadde1] bg-white p-2 shadow-lg">
+                <div className="grid grid-cols-2 gap-1">
                 {categories.map((cat) => (
                   <Link
                     key={cat.id}
@@ -65,6 +62,10 @@ export function Header() {
                     </div>
                   </Link>
                 ))}
+                </div>
+                <Link href="/categories" className="mt-2 block rounded-md px-3 py-2 text-center text-sm font-semibold fb-text hover:bg-[#f0f2f5]">
+                  View all categories →
+                </Link>
               </div>
             </div>
           )}

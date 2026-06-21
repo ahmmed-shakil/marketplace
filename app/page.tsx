@@ -1,23 +1,26 @@
 import Link from "next/link";
 import {
   ArrowRight, GitCompare, BookOpen, Shield, Zap, Store,
-  Search, BarChart3, Users, Package, CheckCircle2,
-  Smartphone, Car, Wind, Bike, Shirt, Home, Wrench, Sparkles, Heart, BookOpen as Book,
+  Search, BarChart3, Users, Package,
 } from "lucide-react";
 import { PageTransition, MotionDiv } from "@/components/motion";
-import { SearchBar } from "@/components/layout/SearchBar";
+import { HeroSearchPanel } from "@/components/home/HeroSearchPanel";
 import { ProductCard } from "@/components/product/ProductCard";
-import { SectionHeader, StatPill } from "@/components/ui/Display";
+import { SectionHeader } from "@/components/ui/Display";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { getFeaturedProducts, getAllComparisons, getAllGuides, getNearbyVendors } from "@/lib/mock";
-import { getTopCategories } from "@/lib/mock/categories";
+import { getTopCategories, getDepartmentCount, getTotalCategoryCount } from "@/lib/mock/categories";
+import { getCategoryIcon } from "@/lib/category-icons";
 import { MotionCard } from "@/components/motion";
 import { products } from "@/lib/mock/products";
 
-const categoryIcons: Record<string, React.ElementType> = {
-  Smartphone, Car, Wind, Bike, Shirt, Home, Wrench, Sparkles, Heart, Book, Package,
-};
+const heroStats = [
+  { value: "10K+", label: "Products" },
+  { value: "100+", label: "Active Vendors" },
+  { value: `${getDepartmentCount()}`, label: "Departments" },
+  { value: `${getTotalCategoryCount()}+`, label: "Subcategories" },
+];
 
 export default function HomePage() {
   const featured = getFeaturedProducts();
@@ -29,70 +32,69 @@ export default function HomePage() {
 
   return (
     <PageTransition>
-      {/* Hero — Facebook blue banner */}
-      <section className="relative mesh-bg hero-pattern overflow-hidden">
-        <div className="relative mx-auto max-w-7xl px-4 py-14 lg:px-6 lg:py-20">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
+      {/* Hero — dark navy data-product aesthetic */}
+      <section className="relative overflow-hidden hero-navy">
+        <div className="relative mx-auto max-w-7xl px-4 py-16 lg:px-6 lg:py-24">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
             <MotionDiv>
-              <Badge variant="fb" className="mb-4 bg-white/20 text-white backdrop-blur-sm">Free forever · No listing fees</Badge>
-              <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl">
-                Know everything about any product.
-                <span className="block mt-1 text-blue-100">Find where to buy it.</span>
+              <h1 className="text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.25rem]">
+                Compare any product
+                <span className="mt-2 block text-accent-cyan">exactly.</span>
               </h1>
-              <p className="mt-4 text-lg text-blue-100/90 leading-relaxed">
-                Complete specs, expert reviews, side-by-side comparisons, and real vendor stock across Bangladesh — all in one place.
+              <p className="mt-5 max-w-lg text-lg leading-relaxed text-slate-400">
+                Full specs, expert reviews, side-by-side comparisons, and live vendor stock across Bangladesh.
               </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Link href="/search"><Button size="lg" className="bg-white text-[#1877f2] hover:bg-blue-50 shadow-lg">Explore Products</Button></Link>
-                <Link href="/vendor-signup"><Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">List Your Store</Button></Link>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <Link href="/search">
+                  <Button size="lg" variant="heroPrimary">
+                    Explore Products
+                  </Button>
+                </Link>
+                <Link href="/vendor-signup">
+                  <Button size="lg" variant="heroGhost">
+                    List Your Store
+                  </Button>
+                </Link>
               </div>
-              <div className="mt-8 flex flex-wrap gap-6 text-sm text-blue-100">
-                {["10,000+ Products", "100+ Vendors", "15 Categories", "Free Listings"].map((t) => (
-                  <span key={t} className="flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4" />{t}</span>
+              <div className="mt-10 flex flex-wrap gap-x-8 gap-y-4 border-t border-white/10 pt-8">
+                {heroStats.map((stat) => (
+                  <div key={stat.label}>
+                    <p className="text-2xl font-bold text-white">{stat.value}</p>
+                    <p className="mt-0.5 text-sm text-slate-500">{stat.label}</p>
+                  </div>
                 ))}
               </div>
             </MotionDiv>
+
             <MotionDiv delay={0.1} className="hidden lg:block">
-              <div className="fb-card-elevated rounded-lg p-6">
-                <p className="mb-3 text-sm font-semibold text-[#65676b]">What are you looking for?</p>
-                <SearchBar large />
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {["iPhone 16", "Royal Enfield", "LG AC", "Rockrider"].map((t) => (
-                    <Link key={t} href={`/search?q=${encodeURIComponent(t)}`} className="rounded-full bg-[#f0f2f5] px-3 py-1 text-xs font-semibold text-[#050505] hover:bg-[#e7f3ff] hover:text-[#1877f2]">
-                      {t}
-                    </Link>
-                  ))}
-                </div>
-              </div>
+              <HeroSearchPanel categories={categories} />
             </MotionDiv>
           </div>
-        </div>
-      </section>
 
-      {/* Stats */}
-      <section className="mx-auto max-w-7xl px-4 -mt-6 lg:px-6">
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-          <StatPill value="10K+" label="Products" trend="+12% this month" />
-          <StatPill value="100+" label="Active Vendors" />
-          <StatPill value="50K" label="Monthly Visitors" trend="+28%" />
-          <StatPill value="15" label="Product Categories" />
+          <div className="relative mt-10 lg:hidden">
+            <HeroSearchPanel categories={categories} />
+          </div>
         </div>
       </section>
 
       {/* Categories grid */}
       <section className="mx-auto max-w-7xl px-4 py-12 lg:px-6">
-        <SectionHeader title="Browse by Category" subtitle="Every product type, one platform" action={<Link href="/search"><Button variant="soft" size="sm">All categories</Button></Link>} />
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        <SectionHeader
+          title="Browse by Category"
+          subtitle={`${getDepartmentCount()} departments · ${getTotalCategoryCount()}+ subcategories · all product types except medicines`}
+          action={<Link href="/categories"><Button variant="soft" size="sm">All categories</Button></Link>}
+        />
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
           {categories.map((cat, i) => {
-            const Icon = categoryIcons[cat.icon] ?? Package;
+            const Icon = getCategoryIcon(cat.icon);
             return (
-              <MotionDiv key={cat.id} delay={i * 0.03}>
+              <MotionDiv key={cat.id} delay={i * 0.02}>
                 <Link href={`/categories/${cat.slug}`} className="group block">
                   <div className="fb-card flex flex-col items-center p-4 text-center transition-all group-hover:border-[#1877f2]">
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#e7f3ff] text-[#1877f2] transition-colors group-hover:fb-primary group-hover:text-white">
                       <Icon className="h-6 w-6" />
                     </div>
-                    <p className="mt-3 text-[13px] font-semibold text-[#050505] leading-tight">{cat.name}</p>
+                    <p className="mt-3 text-[13px] font-semibold leading-tight text-[#050505]">{cat.name}</p>
                     <p className="mt-1 text-xs text-[#65676b]">{cat.productCount.toLocaleString()}</p>
                   </div>
                 </Link>
