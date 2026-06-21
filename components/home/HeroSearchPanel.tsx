@@ -33,7 +33,7 @@ export function HeroSearchPanel({ categories }: { categories: Category[] }) {
       <div className="mt-5 border-t border-[#dadde1] pt-5">
         <div className="mb-3 flex items-center justify-between">
           <p className="text-xs font-semibold uppercase tracking-wide text-[#65676b]">Browse by category</p>
-          <Link href="/categories" className="text-xs font-semibold fb-text hover:underline">View all</Link>
+          <Link href="/categories" className="text-xs font-semibold text-primary hover:underline">View all</Link>
         </div>
         <div className="grid grid-cols-4 gap-2 sm:grid-cols-6 lg:grid-cols-4">
           {display.map((cat) => {
@@ -43,10 +43,10 @@ export function HeroSearchPanel({ categories }: { categories: Category[] }) {
               <Link
                 key={cat.id}
                 href={`/categories/${cat.slug}`}
-                className="group flex flex-col items-center rounded-lg p-2 text-center transition-colors hover:bg-[#f0f2f5]"
+                className="group flex flex-col items-center rounded-lg p-2 text-center transition-colors hover:bg-accent-light"
                 title={cat.name}
               >
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#eef2ff] text-[#4f46e5] transition-colors group-hover:bg-[#4f46e5] group-hover:text-white">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-light text-primary transition-colors group-hover:bg-primary group-hover:text-white">
                   <Icon className="h-4 w-4" />
                 </div>
                 <span className="mt-1.5 line-clamp-2 text-[10px] font-semibold leading-tight text-[#050505]">

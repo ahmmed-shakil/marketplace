@@ -16,7 +16,7 @@ function ListingCard({ listing }: { listing: EnrichedListing }) {
           {listing.vendor.businessName.charAt(0)}
         </div>
         <div>
-          <Link href={`/vendors/${listing.vendor.slug}`} className="font-semibold text-[#050505] hover:text-[#1877f2]">
+          <Link href={`/vendors/${listing.vendor.slug}`} className="font-semibold text-[#050505] hover:text-primary">
             {listing.vendor.businessName}
           </Link>
           <p className="text-xs text-[#65676b]">{listing.location.city} · {listing.location.address}</p>
@@ -38,10 +38,24 @@ function ListingCard({ listing }: { listing: EnrichedListing }) {
   );
 }
 
-export function VendorListingTabs({ listings }: { listings: EnrichedListing[] }) {
+export function VendorListingTabs({
+  listings,
+  variantLabel,
+}: {
+  listings: EnrichedListing[];
+  variantLabel?: string;
+}) {
   const nearby = listings.filter((l) => l.deliveryType === "city" || (l.distanceKm != null && l.distanceKm < 20));
   const nationwide = listings.filter((l) => l.deliveryType === "nationwide");
   const international = listings.filter((l) => l.deliveryType === "international");
+
+  if (listings.length === 0) {
+    return (
+      <p className="rounded-md border border-dashed border-[#dadde1] bg-[#f0f2f5] p-6 text-center text-sm text-[#65676b]">
+        No vendors for{variantLabel ? ` ${variantLabel}` : " this configuration"} — try another variant above.
+      </p>
+    );
+  }
 
   const tabs = [
     { id: "nearby", label: `Nearby (${nearby.length})`, content: <div className="space-y-3">{nearby.length ? nearby.map((l) => <ListingCard key={l.id} listing={l} />) : <p className="text-sm text-[#65676b]">No nearby vendors</p>}</div> },
@@ -51,6 +65,11 @@ export function VendorListingTabs({ listings }: { listings: EnrichedListing[] })
 
   return (
     <div>
+      {variantLabel && (
+        <p className="mb-3 text-sm font-medium text-[#65676b]">
+          Showing prices for: <span className="font-semibold text-[#050505]">{variantLabel}</span>
+        </p>
+      )}
       <div className="mb-4 flex items-center gap-2 text-sm text-[#65676b]">
         <Truck className="h-4 w-4" /> Delivery options from verified vendors
         <Globe className="ml-2 h-4 w-4" /> Free listings forever
@@ -104,12 +123,12 @@ function ReviewList({ reviews }: { reviews: import("@/lib/data").Review[] }) {
         <div key={r.id} className="rounded-lg border border-[#dadde1] bg-white p-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#e7f3ff] text-xs font-bold text-[#1877f2]">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent-light text-xs font-bold text-primary">
                 {r.userName.charAt(0)}
               </div>
               <div>
                 <p className="text-sm font-semibold text-[#050505]">{r.userName}</p>
-                {r.type === "expert" && <span className="text-xs fb-text">Expert Review</span>}
+                {r.type === "expert" && <span className="text-xs text-primary">Expert Review</span>}
               </div>
             </div>
             <div className="flex">{Array.from({ length: r.rating }).map((_, i) => <span key={i} className="text-amber-400">★</span>)}</div>

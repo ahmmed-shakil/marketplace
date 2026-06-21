@@ -30,7 +30,7 @@ export default function CategoriesPage() {
                     <DeptIcon className="h-6 w-6" />
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold text-[#050505] group-hover:fb-text">{dept.name}</h2>
+                    <h2 className="text-xl font-bold text-[#050505] group-hover:text-primary">{dept.name}</h2>
                     {dept.description && <p className="mt-1 text-sm text-[#65676b]">{dept.description}</p>}
                     <p className="mt-1 text-xs font-semibold text-[#65676b]">{dept.productCount.toLocaleString()} products · {subs.length} subcategories</p>
                   </div>

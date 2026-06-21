@@ -29,7 +29,7 @@ export function CategoryFilters({ browse, params }: CategoryFiltersProps) {
         <div className="fb-card p-4">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-[#050505]">{activeCount} filter{activeCount > 1 ? "s" : ""} active</span>
-            <Link href={clearAllUrl} className="text-xs font-semibold fb-text hover:underline">Clear all</Link>
+            <Link href={clearAllUrl} className="text-xs font-semibold text-primary hover:underline">Clear all</Link>
           </div>
         </div>
       )}
@@ -43,7 +43,7 @@ export function CategoryFilters({ browse, params }: CategoryFiltersProps) {
               <li key={sub.id}>
                 <Link
                   href={categoryFilterUrl(category.slug, baseParams, { sub: sub.slug })}
-                  className="flex items-center justify-between rounded-md px-2 py-1.5 text-sm text-[#65676b] hover:bg-[#e7f3ff] hover:text-[#1877f2]"
+                  className="flex items-center justify-between rounded-md px-2 py-1.5 text-sm text-[#65676b] hover:bg-accent-light hover:text-primary"
                 >
                   {sub.name}
                   <span className="text-xs">{sub.productCount.toLocaleString()}</span>
@@ -78,7 +78,7 @@ export function CategoryFilters({ browse, params }: CategoryFiltersProps) {
                   baseParams,
                   active ? { min: null, max: null } : { min: band.min ?? null, max: band.max ?? null }
                 )}
-                className={`block rounded-md px-2 py-1.5 text-sm ${active ? "bg-[#e7f3ff] font-semibold text-[#1877f2]" : "text-[#65676b] hover:bg-[#f0f2f5]"}`}
+                className={`block rounded-md px-2 py-1.5 text-sm ${active ? "bg-accent-light font-semibold text-primary" : "text-[#65676b] hover:bg-[#f0f2f5]"}`}
               >
                 {band.label}
               </Link>
@@ -98,7 +98,7 @@ export function CategoryFilters({ browse, params }: CategoryFiltersProps) {
                 <li key={brand.id}>
                   <Link
                     href={categoryFilterUrl(category.slug, baseParams, { brand: active ? null : brand.slug })}
-                    className={`flex items-center justify-between rounded-md px-2 py-1.5 text-sm ${active ? "bg-[#e7f3ff] font-semibold text-[#1877f2]" : "text-[#65676b] hover:bg-[#f0f2f5]"}`}
+                    className={`flex items-center justify-between rounded-md px-2 py-1.5 text-sm ${active ? "bg-accent-light font-semibold text-primary" : "text-[#65676b] hover:bg-[#f0f2f5]"}`}
                   >
                     {brand.name}
                     <span className="text-xs">({count})</span>
@@ -121,7 +121,7 @@ export function CategoryFilters({ browse, params }: CategoryFiltersProps) {
                 <Link
                   key={tag}
                   href={categoryFilterUrl(category.slug, baseParams, { tag: active ? null : tag })}
-                  className={`rounded-full px-3 py-1 text-xs font-semibold capitalize ${active ? "gradient-bg text-white" : "bg-[#f0f2f5] text-[#050505] hover:bg-[#e7f3ff] hover:text-[#1877f2]"}`}
+                  className={`rounded-full px-3 py-1 text-xs font-semibold capitalize ${active ? "gradient-bg text-white" : "bg-[#f0f2f5] text-[#050505] hover:bg-accent-light hover:text-primary"}`}
                 >
                   {tag} ({count})
                 </Link>
@@ -141,7 +141,7 @@ export function CategoryFilters({ browse, params }: CategoryFiltersProps) {
               <li key={min}>
                 <Link
                   href={categoryFilterUrl(category.slug, baseParams, { rating: active ? null : String(min) })}
-                  className={`block rounded-md px-2 py-1.5 text-sm ${active ? "bg-[#e7f3ff] font-semibold text-[#1877f2]" : "text-[#65676b] hover:bg-[#f0f2f5]"}`}
+                  className={`block rounded-md px-2 py-1.5 text-sm ${active ? "bg-accent-light font-semibold text-primary" : "text-[#65676b] hover:bg-[#f0f2f5]"}`}
                 >
                   {min}★ & above
                 </Link>
@@ -168,7 +168,7 @@ export function CategoryFilters({ browse, params }: CategoryFiltersProps) {
                         ? { [`f_${attribute.slug}`]: null }
                         : { [`f_${attribute.slug}`]: value }
                     )}
-                    className={`flex items-center justify-between rounded-md px-2 py-1.5 text-sm ${active ? "bg-[#e7f3ff] font-semibold text-[#1877f2]" : "text-[#65676b] hover:bg-[#f0f2f5]"}`}
+                    className={`flex items-center justify-between rounded-md px-2 py-1.5 text-sm ${active ? "bg-accent-light font-semibold text-primary" : "text-[#65676b] hover:bg-[#f0f2f5]"}`}
                   >
                     <span className="truncate">{value}</span>
                     <span className="ml-2 shrink-0 text-xs">({count})</span>

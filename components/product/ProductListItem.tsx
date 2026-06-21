@@ -1,36 +1,50 @@
 import Link from "next/link";
-import Image from "next/image";
-import { GitCompare, MapPin } from "lucide-react";
-import type { CategoryProductItem } from "@/lib/data";
+import { GitCompare, MapPin, Store } from "lucide-react";
+import type { VendorProductCardItem } from "@/lib/data";
 import { MotionCard } from "@/components/motion";
 import { RatingStars, PriceTag } from "@/components/ui/Display";
 import { Badge } from "@/components/ui/Badge";
+import { ProductCardImageSlider } from "@/components/product/ProductCardImageSlider";
+import { listingUrlFromCard } from "@/lib/listing-url";
 
-export function ProductListItem({ product }: { product: CategoryProductItem }) {
-  const image = product.images.find((i) => i.isPrimary) ?? product.images[0];
+export function ProductListItem({
+  product,
+  href,
+}: {
+  product: VendorProductCardItem;
+  href?: string;
+}) {
+  const brandLabel = product.brand?.name ?? product.brandName;
 
   return (
-    <Link href={`/products/${product.slug}`} className="group block">
+    <Link href={href ?? listingUrlFromCard(product)} className="group block">
       <MotionCard className="fb-card flex flex-col gap-4 p-4 sm:flex-row sm:items-center">
-        <div className="relative h-40 w-full shrink-0 overflow-hidden rounded-lg bg-[#f0f2f5] sm:h-32 sm:w-40">
-          <Image
-            src={image.url}
-            alt={image.altText}
-            fill
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-            sizes="160px"
-          />
-          {product.tags?.includes("5g") && (
-            <span className="absolute right-2 top-2 rounded-md bg-[#050505]/70 px-2 py-0.5 text-xs font-bold text-white">5G</span>
-          )}
-        </div>
+        <ProductCardImageSlider
+          product={product}
+          className="h-40 w-full shrink-0 rounded-lg sm:h-32 sm:w-40 sm:aspect-auto"
+          sizes="160px"
+        />
 
         <div className="min-w-0 flex-1">
-          <p className="text-xs font-semibold uppercase tracking-wide fb-text">{product.brand.name}</p>
+          <p className="flex items-center gap-1 text-xs font-semibold text-[#31a24c]">
+            <Store className="h-3 w-3" />
+            {product.vendor.businessName}
+          </p>
+          {brandLabel && (
+            <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-primary">{brandLabel}</p>
+          )}
           <h3 className="mt-1 text-lg font-semibold text-[#050505] group-hover:underline">{product.name}</h3>
           <p className="mt-1 line-clamp-2 text-sm text-[#65676b]">{product.description}</p>
 
-          {product.keySpecs.length > 0 && (
+          {product.variantSummary.length > 0 ? (
+            <div className="mt-3 flex flex-wrap gap-2">
+              {product.variantSummary.map((chip) => (
+                <span key={chip} className="rounded-md bg-[#f0f2f5] px-2 py-1 text-xs font-medium text-[#050505]">
+                  {chip}
+                </span>
+              ))}
+            </div>
+          ) : product.keySpecs && product.keySpecs.length > 0 ? (
             <div className="mt-3 flex flex-wrap gap-2">
               {product.keySpecs.map((spec) => (
                 <span key={spec.slug} className="rounded-md bg-[#f0f2f5] px-2 py-1 text-xs font-medium text-[#050505]">
@@ -38,7 +52,7 @@ export function ProductListItem({ product }: { product: CategoryProductItem }) {
                 </span>
               ))}
             </div>
-          )}
+          ) : null}
 
           <div className="mt-3 flex flex-wrap items-center gap-3">
             {product.tags?.map((tag) => (
@@ -53,13 +67,11 @@ export function ProductListItem({ product }: { product: CategoryProductItem }) {
             <RatingStars rating={product.rating} />
             <span className="text-xs text-[#65676b]">({product.reviewCount})</span>
           </div>
-          {product.vendorCount > 0 && (
-            <p className="flex items-center gap-1 text-xs font-medium text-[#31a24c]">
-              <MapPin className="h-3 w-3" />
-              {product.vendorCount} vendor{product.vendorCount > 1 ? "s" : ""}
-            </p>
-          )}
-          <span className="mt-1 flex items-center gap-1 text-xs font-semibold fb-text opacity-0 transition-opacity group-hover:opacity-100">
+          <p className="flex items-center gap-1 text-xs font-medium text-[#65676b]">
+            <MapPin className="h-3 w-3" />
+            {product.deliveryType === "nationwide" ? "Nationwide" : "Local store"}
+          </p>
+          <span className="mt-1 flex items-center gap-1 text-xs font-semibold text-primary opacity-0 transition-opacity group-hover:opacity-100">
             <GitCompare className="h-3 w-3" /> Compare
           </span>
         </div>

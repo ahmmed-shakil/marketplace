@@ -1,15 +1,19 @@
-import { notFound } from "next/navigation";
-import { getProductDetail, getProductById } from "@/lib/mock";
-import { ProductPageClient } from "./ProductPageClient";
+import { notFound, redirect } from "next/navigation";
+import { getFirstListingForLegacyProductSlug } from "@/lib/mock";
+import { listingUrl } from "@/lib/listing-url";
+import { getVendorById } from "@/lib/mock/vendors";
 
-export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function LegacyProductRedirect({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
-  const product = getProductDetail(slug);
-  if (!product) notFound();
+  const listing = getFirstListingForLegacyProductSlug(slug);
+  if (!listing) notFound();
 
-  const related = product.relatedProductIds
-    .map((id) => getProductById(id))
-    .filter((p): p is NonNullable<typeof p> => p != null);
+  const vendor = getVendorById(listing.vendorId);
+  if (!vendor) notFound();
 
-  return <ProductPageClient product={product} related={related} />;
+  redirect(listingUrl(vendor.slug, listing.slug));
 }

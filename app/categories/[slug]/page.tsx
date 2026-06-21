@@ -59,7 +59,7 @@ export default async function CategoryPage({
           <div className="flex flex-wrap gap-2">
             <Link
               href={`/categories/${category.slug}`}
-              className={`rounded-md px-4 py-2 text-sm font-semibold ${!filters.subcategorySlug ? "gradient-bg text-white" : "bg-[#f0f2f5] text-[#050505] hover:bg-[#e7f3ff] hover:text-[#1877f2]"}`}
+              className={`rounded-md px-4 py-2 text-sm font-semibold ${!filters.subcategorySlug ? "gradient-bg text-white" : "bg-[#f0f2f5] text-[#050505] hover:bg-accent-light hover:text-primary"}`}
             >
               All {category.name}
             </Link>
@@ -67,7 +67,7 @@ export default async function CategoryPage({
               <Link
                 key={sub.id}
                 href={categoryFilterUrl(category.slug, rawParams, { sub: sub.slug })}
-                className={`rounded-md px-4 py-2 text-sm font-semibold ${filters.subcategorySlug === sub.slug ? "gradient-bg text-white" : "bg-[#f0f2f5] text-[#050505] hover:bg-[#e7f3ff] hover:text-[#1877f2]"}`}
+                className={`rounded-md px-4 py-2 text-sm font-semibold ${filters.subcategorySlug === sub.slug ? "gradient-bg text-white" : "bg-[#f0f2f5] text-[#050505] hover:bg-accent-light hover:text-primary"}`}
               >
                 {sub.name}
               </Link>
@@ -108,7 +108,11 @@ export default async function CategoryPage({
           ) : (
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {products.map((p) => (
-                <ProductCard key={p.id} product={p} keySpecs={p.keySpecs} />
+                <ProductCard
+                  key={p.id}
+                  product={p}
+                  variantSummary={p.variantSummary}
+                />
               ))}
             </div>
           )}

@@ -64,7 +64,7 @@ export function CategoryToolbar({ browse, params, view }: CategoryToolbarProps) 
                 "rounded-full px-3 py-1 text-xs font-semibold transition-colors",
                 currentSort === opt.value
                   ? "gradient-bg text-white"
-                  : "border border-[#dadde1] bg-white text-[#65676b] hover:bg-[#e7f3ff] hover:text-[#1877f2]"
+                  : "border border-[#dadde1] bg-white text-[#65676b] hover:bg-accent-light hover:text-primary"
               )}
             >
               {opt.label}
@@ -111,7 +111,7 @@ function FilterChip({ label, href }: { label: string; href: string }) {
   return (
     <Link
       href={href}
-      className="inline-flex items-center gap-1 rounded-full bg-[#e7f3ff] px-3 py-1 text-xs font-semibold text-[#1877f2] hover:bg-[#dbe7fd]"
+      className="inline-flex items-center gap-1 rounded-full bg-accent-light px-3 py-1 text-xs font-semibold text-primary hover:bg-indigo-100"
     >
       {label}
       <span aria-hidden>×</span>

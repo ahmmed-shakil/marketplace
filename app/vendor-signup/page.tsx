@@ -16,20 +16,20 @@ export default function VendorSignupPage() {
 
   return (
     <div className="relative min-h-[80vh] overflow-hidden px-4 py-12">
-      <div className="orb left-10 top-20 h-64 w-64 bg-[#1877f2]/20" />
-      <div className="orb right-10 bottom-20 h-72 w-72 bg-[#1877f2]/15 animate-float" />
+      <div className="orb left-10 top-20 h-64 w-64 bg-primary/20" />
+      <div className="orb right-10 bottom-20 h-72 w-72 bg-primary/15 animate-float" />
       <PageTransition className="relative mx-auto max-w-lg">
         <div className="glass-card rounded-3xl p-8 shadow-xl">
           <div className="mb-6 flex items-center justify-center gap-2">
             {[1, 2, 3].map((s) => (
-              <div key={s} className={`h-2 rounded-full transition-all ${s === step ? "w-8 gradient-bg" : s < step ? "w-2 bg-[#1877f2]" : "w-2 bg-slate-200"}`} />
+              <div key={s} className={`h-2 rounded-full transition-all ${s === step ? "w-8 gradient-bg" : s < step ? "w-2 bg-primary" : "w-2 bg-slate-200"}`} />
             ))}
           </div>
 
           {step === 1 && (
             <>
               <div className="flex items-center gap-3">
-                <Store className="h-6 w-6 text-[#1877f2]" />
+                <Store className="h-6 w-6 text-primary" />
                 <h1 className="text-xl font-bold text-slate-900">Business Details</h1>
               </div>
               <p className="mt-1 text-sm text-slate-500">List your store for free — forever</p>
@@ -54,7 +54,7 @@ export default function VendorSignupPage() {
           {step === 2 && (
             <>
               <div className="flex items-center gap-3">
-                <MapPin className="h-6 w-6 text-[#1877f2]" />
+                <MapPin className="h-6 w-6 text-primary" />
                 <h1 className="text-xl font-bold text-slate-900">Location & Category</h1>
               </div>
               <div className="mt-6 space-y-4">
@@ -98,7 +98,7 @@ export default function VendorSignupPage() {
           )}
 
           <p className="mt-6 text-center text-sm text-slate-500">
-            <Link href="/login" className="text-[#1877f2] hover:underline">Already registered?</Link>
+            <Link href="/login" className="text-primary hover:underline">Already registered?</Link>
           </p>
         </div>
       </PageTransition>

@@ -49,7 +49,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
                         <Image src={p.images[0]?.url ?? ""} alt={p.name} fill className="object-cover" sizes="96px" />
                       </div>
                       <p className="mt-2 font-semibold text-[#050505]">{p.name}</p>
-                      <p className="fb-text font-bold">{formatPrice(p.minPrice)}</p>
+                      <p className="text-primary font-bold">{formatPrice(p.minPrice)}</p>
                     </Link>
                   </th>
                 ))}
@@ -61,10 +61,10 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
                 const unique = new Set(values);
                 const hasDiff = unique.size > 1;
                 return (
-                  <tr key={specSlug} className={cn("border-t border-[#dadde1]", hasDiff && "bg-[#e7f3ff]/50")}>
+                  <tr key={specSlug} className={cn("border-t border-[#dadde1]", hasDiff && "bg-accent-light/50")}>
                     <td className="p-4 font-medium text-[#65676b] capitalize">{specSlug.replace(/-/g, " ")}</td>
                     {values.map((v, i) => (
-                      <td key={i} className={cn("p-4 text-center text-[#050505]", hasDiff && "font-semibold fb-text")}>{v}</td>
+                      <td key={i} className={cn("p-4 text-center text-[#050505]", hasDiff && "font-semibold text-primary")}>{v}</td>
                     ))}
                   </tr>
                 );
@@ -78,7 +78,7 @@ export default async function ComparePage({ searchParams }: { searchParams: Prom
         <h3 className="font-semibold text-[#050505]">Popular Comparisons</h3>
         <div className="mt-3 flex flex-wrap gap-2">
           {getAllComparisons().map((c) => (
-            <Link key={c.id} href={`/compare?ids=${c.productIds.join(",")}`} className="rounded-full border border-[#dadde1] bg-[#f0f2f5] px-4 py-2 text-sm font-medium text-[#050505] hover:bg-[#e7f3ff] hover:text-[#1877f2]">
+            <Link key={c.id} href={`/compare?ids=${c.productIds.join(",")}`} className="rounded-full border border-[#dadde1] bg-[#f0f2f5] px-4 py-2 text-sm font-medium text-[#050505] hover:bg-accent-light hover:text-primary">
               {c.title}
             </Link>
           ))}

@@ -30,7 +30,7 @@ export default function RegisterPage() {
             </form>
             <p className="mt-4 text-center text-[15px] text-[#65676b]">
               Already have an account?{" "}
-              <Link href="/login" className="font-semibold fb-text hover:underline">Log in</Link>
+              <Link href="/login" className="font-semibold text-primary hover:underline">Log in</Link>
             </p>
           </div>
         </PageTransition>

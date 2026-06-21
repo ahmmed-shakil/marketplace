@@ -3,14 +3,17 @@ import { PageTransition } from "@/components/motion";
 import { ProductCard } from "@/components/product/ProductCard";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { Badge } from "@/components/ui/Badge";
-import { getGuideBySlug, getProductById } from "@/lib/mock";
+import { getGuideBySlug, getAllVendorProducts, enrichVendorProductForCard } from "@/lib/mock";
 
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const guide = getGuideBySlug(slug);
   if (!guide) notFound();
 
-  const recommended = guide.productIds.map((id) => getProductById(id)).filter(Boolean);
+  const recommended = getAllVendorProducts()
+    .filter((vp) => guide.productIds.some((pid) => vp.productGroupId?.includes(pid.replace("prod-", "")) || vp.name.toLowerCase().includes("iphone") || vp.name.toLowerCase().includes("galaxy")))
+    .slice(0, 6)
+    .map(enrichVendorProductForCard);
 
   return (
     <PageTransition className="mx-auto max-w-4xl px-4 py-8 lg:px-6">
@@ -25,9 +28,9 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
       </div>
       {recommended.length > 0 && (
         <section className="mt-12">
-          <h2 className="text-xl font-bold text-slate-900">Recommended Products</h2>
+          <h2 className="text-xl font-bold text-slate-900">Vendor listings for you</h2>
           <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {recommended.map((p) => p && <ProductCard key={p.id} product={p} />)}
+            {recommended.map((p) => <ProductCard key={p.id} product={p} variantSummary={p.variantSummary} />)}
           </div>
         </section>
       )}

@@ -31,7 +31,7 @@ export function Header() {
       <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-2 lg:px-6">
         <Link href="/" className="flex shrink-0 items-center gap-2">
           <div className="flex h-10 w-10 items-center justify-center rounded-full fb-primary text-lg font-bold">M</div>
-          <span className="hidden text-xl font-bold text-[#1877f2] sm:block">Market</span>
+          <span className="hidden text-xl font-bold text-primary sm:block">Market</span>
         </Link>
 
         <div
@@ -40,7 +40,7 @@ export function Header() {
           onMouseLeave={() => setMegaOpen(false)}
         >
           <button className="flex items-center gap-2 rounded-md px-3 py-2 text-[15px] font-semibold text-[#050505] hover:bg-[#f2f2f2]">
-            <Grid3X3 className="h-5 w-5 text-[#1877f2]" />
+            <Grid3X3 className="h-5 w-5 text-primary" />
             Categories
           </button>
           {megaOpen && (
@@ -53,7 +53,7 @@ export function Header() {
                     href={`/categories/${cat.slug}`}
                     className="flex items-center gap-3 rounded-md px-3 py-2.5 hover:bg-[#f2f2f2]"
                   >
-                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#e7f3ff] text-[#1877f2]">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-full bg-accent-light text-primary">
                       <CategoryIcon name={cat.icon} />
                     </div>
                     <div>
@@ -63,7 +63,7 @@ export function Header() {
                   </Link>
                 ))}
                 </div>
-                <Link href="/categories" className="mt-2 block rounded-md px-3 py-2 text-center text-sm font-semibold fb-text hover:bg-[#f0f2f5]">
+                <Link href="/categories" className="mt-2 block rounded-md px-3 py-2 text-center text-sm font-semibold text-primary hover:bg-[#f0f2f5]">
                   View all categories →
                 </Link>
               </div>
@@ -82,7 +82,7 @@ export function Header() {
               href={href}
               className="hidden items-center gap-1.5 rounded-md px-3 py-2 text-[15px] font-semibold text-[#050505] hover:bg-[#f2f2f2] lg:flex"
             >
-              <Icon className="h-5 w-5 text-[#1877f2]" />
+              <Icon className="h-5 w-5 text-primary" />
               {label}
             </Link>
           ))}

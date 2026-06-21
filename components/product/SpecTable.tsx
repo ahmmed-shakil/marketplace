@@ -12,7 +12,7 @@ export function SpecTable({ specs }: { specs: SpecRow[] }) {
     <div className="space-y-5">
       {Object.entries(groups).map(([group, rows]) => (
         <div key={group}>
-          <h4 className="mb-2 text-sm font-bold uppercase tracking-wide fb-text">{group}</h4>
+          <h4 className="mb-2 text-sm font-bold uppercase tracking-wide text-primary">{group}</h4>
           <div className="overflow-hidden rounded-md border border-[#dadde1]">
             <table className="w-full text-[15px]">
               <tbody>

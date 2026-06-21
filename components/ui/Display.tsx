@@ -20,7 +20,7 @@ export function PriceTag({ min, max, size = "md" }: { min: number; max: number; 
   const fmt = (n: number) => `৳${n.toLocaleString("en-BD")}`;
   const sizes = { sm: "text-base", md: "text-lg", lg: "text-2xl" };
   return (
-    <span className={cn("font-bold fb-text", sizes[size])}>
+    <span className={cn("font-bold text-primary", sizes[size])}>
       {min === max ? fmt(min) : `${fmt(min)} – ${fmt(max)}`}
     </span>
   );
@@ -31,14 +31,14 @@ export function StockBadge({ status }: { status: string }) {
     in_stock: { label: "In Stock", className: "bg-[#e7f3ef] text-[#31a24c]" },
     low_stock: { label: "Low Stock", className: "bg-[#fff8e6] text-[#b8860b]" },
     out_of_stock: { label: "Out of Stock", className: "bg-[#ffebe9] text-[#f02849]" },
-    pre_order: { label: "Pre-Order", className: "bg-[#e7f3ff] text-[#1877f2]" },
+    pre_order: { label: "Pre-Order", className: "bg-accent-light text-primary" },
   };
   const { label, className } = map[status] ?? { label: status, className: "bg-[#e4e6eb] text-[#65676b]" };
   return <span className={cn("rounded-md px-2 py-0.5 text-xs font-semibold", className)}>{label}</span>;
 }
 
 export function GradientText({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <span className={cn("fb-text font-bold", className)}>{children}</span>;
+  return <span className={cn("text-primary font-bold", className)}>{children}</span>;
 }
 
 export function SectionHeader({ title, subtitle, action }: { title: string; subtitle?: string; action?: React.ReactNode }) {
@@ -66,7 +66,7 @@ export function EmptyState({ title, description, icon: Icon }: { title: string; 
 export function StatPill({ label, value, trend }: { label: string; value: string; trend?: string }) {
   return (
     <div className="fb-card flex flex-col items-center px-6 py-4 text-center">
-      <span className="text-2xl font-bold fb-text">{value}</span>
+      <span className="text-2xl font-bold text-primary">{value}</span>
       <span className="mt-1 text-[13px] font-medium text-[#65676b]">{label}</span>
       {trend && (
         <span className="mt-1 flex items-center gap-1 text-xs font-semibold text-[#31a24c]">

@@ -12,10 +12,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       primary: "fb-primary font-semibold shadow-sm hover:shadow-md active:scale-[0.98]",
       secondary: "bg-[#e4e6eb] text-[#050505] hover:bg-[#d8dadf] font-semibold",
       ghost: "text-[#65676b] hover:bg-[#f2f2f2] font-medium",
-      outline: "border border-[#1877f2] text-[#1877f2] bg-white hover:bg-[#e7f3ff] font-semibold",
-      soft: "bg-[#e7f3ff] text-[#1877f2] hover:bg-[#dbeafe] font-semibold",
+      outline: "border border-primary text-primary bg-white hover:bg-accent-light font-semibold",
+      soft: "bg-accent-light text-primary hover:bg-indigo-100 font-semibold",
       inverse: "border-2 border-white bg-transparent text-white hover:bg-white/15 font-semibold",
-      heroPrimary: "bg-white text-[#0a0f2c] shadow-md hover:bg-[#f0f2f5] font-semibold",
+      heroPrimary: "bg-white text-primary shadow-md hover:bg-[#f0f2f5] font-semibold",
       heroGhost: "bg-white/10 text-white backdrop-blur-sm hover:bg-white/20 font-semibold",
     };
     const sizes = {

@@ -196,20 +196,109 @@ export const categories: Category[] = seeds.map((s) => {
 export const categoryAttributes: CategoryAttribute[] = [
   { id: "attr-ram", categoryId: "cat-smartphones", name: "RAM", slug: "ram", attrType: "enum", allowedValues: ["4GB", "6GB", "8GB", "12GB", "16GB"], isFilterable: true, isComparable: true, sortOrder: 1, group: "Performance" },
   { id: "attr-storage", categoryId: "cat-smartphones", name: "Storage", slug: "storage", attrType: "enum", allowedValues: ["64GB", "128GB", "256GB", "512GB", "1TB"], isFilterable: true, isComparable: true, sortOrder: 2, group: "Performance" },
-  { id: "attr-camera", categoryId: "cat-smartphones", name: "Main Camera", slug: "camera", attrType: "number", unit: "MP", isFilterable: true, isComparable: true, sortOrder: 3, group: "Camera" },
-  { id: "attr-battery", categoryId: "cat-smartphones", name: "Battery", slug: "battery", attrType: "number", unit: "mAh", isFilterable: true, isComparable: true, sortOrder: 4, group: "Battery" },
-  { id: "attr-display", categoryId: "cat-smartphones", name: "Display", slug: "display", attrType: "dimension", unit: "inches", isFilterable: true, isComparable: true, sortOrder: 5, group: "Display" },
-  { id: "attr-5g", categoryId: "cat-smartphones", name: "5G Support", slug: "5g", attrType: "boolean", isFilterable: true, isComparable: true, sortOrder: 6, group: "Connectivity" },
+  { id: "attr-color-phone", categoryId: "cat-smartphones", name: "Color", slug: "color", attrType: "enum", allowedValues: ["Black", "White", "Silver", "Blue", "Violet", "Titanium Gray", "Natural Titanium"], isFilterable: true, isComparable: false, sortOrder: 3, group: "Design" },
+  { id: "attr-camera", categoryId: "cat-smartphones", name: "Main Camera", slug: "camera", attrType: "number", unit: "MP", isFilterable: true, isComparable: true, sortOrder: 4, group: "Camera" },
+  { id: "attr-battery", categoryId: "cat-smartphones", name: "Battery", slug: "battery", attrType: "number", unit: "mAh", isFilterable: true, isComparable: true, sortOrder: 5, group: "Battery" },
+  { id: "attr-display", categoryId: "cat-smartphones", name: "Display", slug: "display", attrType: "dimension", unit: "inches", isFilterable: true, isComparable: true, sortOrder: 6, group: "Display" },
+  { id: "attr-5g", categoryId: "cat-smartphones", name: "5G Support", slug: "5g", attrType: "boolean", isFilterable: true, isComparable: true, sortOrder: 7, group: "Connectivity" },
   { id: "attr-engine", categoryId: "cat-motorcycles", name: "Engine", slug: "engine", attrType: "number", unit: "cc", isFilterable: true, isComparable: true, sortOrder: 1, group: "Engine" },
-  { id: "attr-power", categoryId: "cat-motorcycles", name: "Max Power", slug: "power", attrType: "number", unit: "bhp", isFilterable: false, isComparable: true, sortOrder: 2, group: "Engine" },
-  { id: "attr-mileage", categoryId: "cat-motorcycles", name: "Mileage", slug: "mileage", attrType: "range", unit: "km/l", isFilterable: true, isComparable: true, sortOrder: 3, group: "Performance" },
-  { id: "attr-frame", categoryId: "cat-cycling", name: "Frame Material", slug: "frame", attrType: "enum", allowedValues: ["Aluminum", "Carbon", "Steel", "Alloy"], isFilterable: true, isComparable: true, sortOrder: 1, group: "Frame" },
-  { id: "attr-weight", categoryId: "cat-cycling", name: "Weight", slug: "weight", attrType: "number", unit: "kg", isFilterable: true, isComparable: true, sortOrder: 2, group: "Frame" },
+  { id: "attr-moto-color", categoryId: "cat-motorcycles", name: "Color", slug: "color", attrType: "enum", allowedValues: ["Black", "Red", "Blue", "Racing Blue", "Rebel Red"], isFilterable: true, isComparable: false, sortOrder: 2, group: "Design" },
+  { id: "attr-power", categoryId: "cat-motorcycles", name: "Max Power", slug: "power", attrType: "number", unit: "bhp", isFilterable: false, isComparable: true, sortOrder: 3, group: "Engine" },
+  { id: "attr-mileage", categoryId: "cat-motorcycles", name: "Mileage", slug: "mileage", attrType: "range", unit: "km/l", isFilterable: true, isComparable: true, sortOrder: 4, group: "Performance" },
+  { id: "attr-frame-size", categoryId: "cat-cycling", name: "Frame Size", slug: "frame_size", attrType: "enum", allowedValues: ["S", "M", "L", "XL"], isFilterable: true, isComparable: true, sortOrder: 1, group: "Frame" },
+  { id: "attr-frame", categoryId: "cat-cycling", name: "Frame Material", slug: "frame", attrType: "enum", allowedValues: ["Aluminum", "Carbon", "Steel", "Alloy"], isFilterable: true, isComparable: true, sortOrder: 2, group: "Frame" },
+  { id: "attr-wheels", categoryId: "cat-cycling", name: "Wheel Size", slug: "wheel_size", attrType: "enum", allowedValues: ["26\"", "27.5\"", "29\""], isFilterable: true, isComparable: true, sortOrder: 3, group: "Wheels" },
+  { id: "attr-weight", categoryId: "cat-cycling", name: "Weight", slug: "weight", attrType: "number", unit: "kg", isFilterable: true, isComparable: true, sortOrder: 4, group: "Frame" },
   { id: "attr-ac-cap", categoryId: "cat-ac", name: "Capacity", slug: "capacity", attrType: "enum", allowedValues: ["1 Ton", "1.5 Ton", "2 Ton"], isFilterable: true, isComparable: true, sortOrder: 1, group: "Cooling" },
   { id: "attr-ac-type", categoryId: "cat-ac", name: "Type", slug: "type", attrType: "enum", allowedValues: ["Split", "Window", "Portable"], isFilterable: true, isComparable: true, sortOrder: 2, group: "General" },
   { id: "attr-laptop-ram", categoryId: "cat-laptops", name: "RAM", slug: "ram", attrType: "enum", allowedValues: ["8GB", "16GB", "32GB"], isFilterable: true, isComparable: true, sortOrder: 1, group: "Performance" },
   { id: "attr-laptop-storage", categoryId: "cat-laptops", name: "Storage", slug: "storage", attrType: "enum", allowedValues: ["256GB SSD", "512GB SSD", "1TB SSD"], isFilterable: true, isComparable: true, sortOrder: 2, group: "Performance" },
+  { id: "attr-laptop-screen", categoryId: "cat-laptops", name: "Screen Size", slug: "screen_size", attrType: "enum", allowedValues: ["13\"", "14\"", "15.6\"", "16\""], isFilterable: true, isComparable: true, sortOrder: 3, group: "Display" },
+  { id: "attr-pack-size", categoryId: "cat-rice-grains", name: "Pack Size", slug: "pack_size", attrType: "enum", allowedValues: ["1kg", "2kg", "5kg", "25kg"], isFilterable: true, isComparable: true, sortOrder: 1, group: "General" },
+  { id: "attr-grain-type", categoryId: "cat-rice-grains", name: "Grain Type", slug: "grain_type", attrType: "enum", allowedValues: ["Miniket", "Nazirshail", "Basmati", "Chinigura"], isFilterable: true, isComparable: true, sortOrder: 2, group: "General" },
+  { id: "attr-snack-pack", categoryId: "cat-snacks", name: "Pack Size", slug: "pack_size", attrType: "enum", allowedValues: ["50g", "100g", "200g", "500g"], isFilterable: true, isComparable: true, sortOrder: 1, group: "General" },
+  { id: "attr-beverage-pack", categoryId: "cat-beverages", name: "Pack Size", slug: "pack_size", attrType: "enum", allowedValues: ["250ml", "500ml", "1L", "2L"], isFilterable: true, isComparable: true, sortOrder: 1, group: "General" },
+  { id: "attr-footwear-size", categoryId: "cat-footwear", name: "Size", slug: "size", attrType: "enum", allowedValues: ["7", "8", "9", "10", "11", "12"], isFilterable: true, isComparable: true, sortOrder: 1, group: "General" },
+  { id: "attr-footwear-color", categoryId: "cat-footwear", name: "Color", slug: "color", attrType: "enum", allowedValues: ["Black", "White", "Grey", "Blue", "Red"], isFilterable: true, isComparable: false, sortOrder: 2, group: "Design" },
+  { id: "attr-fridge-cap", categoryId: "cat-fridges", name: "Capacity", slug: "capacity", attrType: "enum", allowedValues: ["252L", "360L", "415L", "500L"], isFilterable: true, isComparable: true, sortOrder: 1, group: "General" },
+  { id: "attr-fridge-type", categoryId: "cat-fridges", name: "Type", slug: "type", attrType: "enum", allowedValues: ["Single Door", "Double Door", "Side by Side"], isFilterable: true, isComparable: true, sortOrder: 2, group: "General" },
+  { id: "attr-washer-cap", categoryId: "cat-washers", name: "Capacity", slug: "capacity", attrType: "enum", allowedValues: ["7kg", "7.5kg", "8kg", "9kg"], isFilterable: true, isComparable: true, sortOrder: 1, group: "General" },
+  { id: "attr-washer-type", categoryId: "cat-washers", name: "Type", slug: "type", attrType: "enum", allowedValues: ["Top Load", "Front Load"], isFilterable: true, isComparable: true, sortOrder: 2, group: "General" },
+  { id: "attr-beauty-pack", categoryId: "cat-skincare", name: "Pack Size", slug: "pack_size", attrType: "enum", allowedValues: ["50ml", "100ml", "200ml", "500ml"], isFilterable: true, isComparable: true, sortOrder: 1, group: "General" },
+  { id: "attr-beauty-variant", categoryId: "cat-skincare", name: "Variant", slug: "variant_type", attrType: "enum", allowedValues: ["Regular", "Sensitive", "SPF"], isFilterable: true, isComparable: true, sortOrder: 2, group: "General" },
+  { id: "attr-beauty-color", categoryId: "cat-skincare", name: "Color", slug: "color", attrType: "enum", allowedValues: ["Natural", "Ivory", "Beige", "Rose"], isFilterable: true, isComparable: false, sortOrder: 3, group: "Design" },
 ];
+
+type InheritanceRule = {
+  from: string;
+  includeSlugs?: string[];
+  excludeSlugs?: string[];
+};
+
+/** Subcategories without direct attrs inherit variant dimensions from a template category. */
+const categoryAttributeInheritance: Record<string, InheritanceRule> = {
+  "cat-feature-phones": { from: "cat-smartphones", includeSlugs: ["storage", "color"] },
+  "cat-tablets": { from: "cat-smartphones", includeSlugs: ["storage", "color"] },
+  "cat-wearables": { from: "cat-smartphones", includeSlugs: ["storage", "color"] },
+  "cat-desktops": { from: "cat-laptops" },
+  "cat-monitors": { from: "cat-laptops", includeSlugs: ["screen_size", "ram"] },
+  "cat-scooters": { from: "cat-motorcycles", includeSlugs: ["engine", "color"] },
+  "cat-ev": { from: "cat-motorcycles", includeSlugs: ["engine", "color"] },
+  "cat-microwaves": { from: "cat-ac" },
+  "cat-fans": { from: "cat-ac", includeSlugs: ["capacity", "type"] },
+  "cat-vacuum": { from: "cat-ac", includeSlugs: ["capacity", "type"] },
+  "cat-kitchen-appliances": { from: "cat-ac" },
+  "cat-small-appliances": { from: "cat-ac" },
+  "cat-water-purifiers": { from: "cat-fridges", includeSlugs: ["capacity", "type"] },
+  "cat-mens-clothing": { from: "cat-footwear", includeSlugs: ["size", "color"] },
+  "cat-womens-clothing": { from: "cat-footwear", includeSlugs: ["size", "color"] },
+  "cat-kids-clothing": { from: "cat-footwear", includeSlugs: ["size", "color"] },
+  "cat-haircare": { from: "cat-skincare" },
+  "cat-makeup": { from: "cat-skincare" },
+  "cat-fragrances": { from: "cat-skincare", includeSlugs: ["pack_size", "variant_type"] },
+  "cat-mens-grooming": { from: "cat-skincare", includeSlugs: ["pack_size", "variant_type"] },
+  "cat-beauty-devices": { from: "cat-skincare", includeSlugs: ["color"] },
+  "cat-cooking-ingredients": { from: "cat-rice-grains", includeSlugs: ["pack_size"] },
+  "cat-organic": { from: "cat-rice-grains", includeSlugs: ["pack_size"] },
+  "cat-pet-food": { from: "cat-snacks", includeSlugs: ["pack_size"] },
+  "cat-diapers-feeding": { from: "cat-snacks", includeSlugs: ["pack_size"] },
+};
+
+const GENERIC_VARIANT_ATTR_TEMPLATE: Omit<CategoryAttribute, "id" | "categoryId">[] = [
+  { name: "Color", slug: "color", attrType: "enum", allowedValues: ["Black", "Blue", "Red", "Silver"], isFilterable: true, isComparable: false, sortOrder: 1, group: "Design" },
+  { name: "Option", slug: "option", attrType: "enum", allowedValues: ["Standard", "Plus"], isFilterable: true, isComparable: true, sortOrder: 2, group: "General" },
+];
+
+function cloneAttributesForCategory(source: CategoryAttribute[], categoryId: string, rule?: InheritanceRule): CategoryAttribute[] {
+  let attrs = source;
+  if (rule?.includeSlugs?.length) {
+    attrs = attrs.filter((a) => rule.includeSlugs!.includes(a.slug));
+  }
+  if (rule?.excludeSlugs?.length) {
+    attrs = attrs.filter((a) => !rule.excludeSlugs!.includes(a.slug));
+  }
+  return attrs.map((a) => ({
+    ...a,
+    id: `${a.id}-inh-${categoryId}`,
+    categoryId,
+  }));
+}
+
+function resolveInheritedAttributes(categoryId: string): CategoryAttribute[] {
+  const rule = categoryAttributeInheritance[categoryId];
+  if (!rule) return [];
+  const source = categoryAttributes.filter((a) => a.categoryId === rule.from);
+  if (source.length === 0) return [];
+  return cloneAttributesForCategory(source, categoryId, rule);
+}
+
+function buildGenericAttributes(categoryId: string): CategoryAttribute[] {
+  return GENERIC_VARIANT_ATTR_TEMPLATE.map((a) => ({
+    ...a,
+    id: `attr-generic-${a.slug}-${categoryId}`,
+    categoryId,
+  }));
+}
 
 export function getCategoryBySlug(slug: string): Category | undefined {
   return categories.find((c) => c.slug === slug);
@@ -228,7 +317,18 @@ export function getSubcategories(parentId: string): Category[] {
 }
 
 export function getCategoryAttributes(categoryId: string): CategoryAttribute[] {
-  return categoryAttributes.filter((a) => a.categoryId === categoryId);
+  const direct = categoryAttributes.filter((a) => a.categoryId === categoryId);
+  if (direct.length > 0) return direct;
+  return resolveInheritedAttributes(categoryId);
+}
+
+/** Filterable enum attrs for variant generation and UI — falls back to generic color/option. */
+export function getFilterableVariantAttributes(categoryId: string): CategoryAttribute[] {
+  const attrs = getCategoryAttributes(categoryId).filter(
+    (a) => a.isFilterable && a.allowedValues && a.allowedValues.length > 0,
+  );
+  if (attrs.length > 0) return attrs;
+  return buildGenericAttributes(categoryId);
 }
 
 export function getTotalCategoryCount(): number {

@@ -19,7 +19,7 @@ export default function GuidesPage() {
         {guides.map((g) => (
           <Link key={g.id} href={`/guides/${g.slug}`}>
             <MotionCard className="fb-card overflow-hidden">
-              <div className="h-44 bg-gradient-to-br from-[#1877f2]/10 via-[#e7f3ff] to-[#f0f2f5]" />
+              <div className="h-44 bg-gradient-to-br from-primary/10 via-accent-light to-[#f0f2f5]" />
               <div className="p-5">
                 <Badge variant="primary">{g.budgetLabel}</Badge>
                 <h2 className="mt-2 text-lg font-semibold text-[#050505]">{g.title}</h2>

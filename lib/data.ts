@@ -12,6 +12,8 @@ export type AttributeType =
 
 export type ProductStatus = "draft" | "published" | "archived";
 
+export type VendorProductStatus = "draft" | "pending" | "published" | "rejected";
+
 export type ReviewType = "expert" | "user";
 
 export type ReviewStatus = "pending" | "approved" | "rejected";
@@ -228,7 +230,55 @@ export interface VendorLocation {
   isPrimary: boolean;
 }
 
-/** DB: vendor_listings */
+/** DB: vendor_products — vendor-owned marketplace listings */
+export interface CustomSpec {
+  key: string;
+  value: string;
+}
+
+export interface VendorProductVariant {
+  id: string;
+  vendorProductId: string;
+  sku?: string;
+  name: string;
+  attributes: Record<string, string>;
+  price: number;
+  stockStatus: StockStatus;
+  images: ProductImage[];
+  isDefault: boolean;
+}
+
+export interface VendorProduct {
+  id: string;
+  vendorId: string;
+  categoryId: string;
+  brandId?: string;
+  brandName?: string;
+  name: string;
+  slug: string;
+  description: string;
+  status: VendorProductStatus;
+  templateSpecs: Record<string, string>;
+  customSpecs: CustomSpec[];
+  variants: VendorProductVariant[];
+  images: ProductImage[];
+  minPrice: number;
+  maxPrice: number;
+  stockStatus: StockStatus;
+  condition: ProductCondition;
+  warranty?: string;
+  locationId: string;
+  deliveryType: DeliveryRegionType;
+  rating: number;
+  reviewCount: number;
+  tags?: string[];
+  createdAt: string;
+  updatedAt: string;
+  /** Soft cluster key for similar listings (brand + normalized name + category) */
+  productGroupId?: string;
+}
+
+/** DB: vendor_listings @deprecated — folded into vendor_products */
 export interface VendorListing {
   id: string;
   vendorId: string;
@@ -293,6 +343,7 @@ export interface SearchFilters {
   minPrice?: number;
   maxPrice?: number;
   sort?: "relevance" | "price_asc" | "price_desc" | "rating";
+  specFilters?: Record<string, string>;
 }
 
 export interface CategoryBrowseFilters {
@@ -317,14 +368,34 @@ export interface AttributeFacet {
   values: { value: string; count: number }[];
 }
 
+export interface VendorProductCardItem extends VendorProduct {
+  vendor: Vendor;
+  brand: Brand | null;
+  variantSummary: string[];
+  keySpecs?: SpecRow[];
+}
+
+export interface VendorProductDetail extends VendorProduct {
+  vendor: Vendor;
+  category: Category;
+  brand: Brand | null;
+  location: VendorLocation;
+  similarListingIds: string[];
+}
+
+/** @deprecated Use VendorProductCardItem */
 export interface CategoryProductItem extends Product {
   brand: Brand;
   keySpecs: SpecRow[];
   vendorCount: number;
+  variantSummary: string[];
 }
 
+/** Marketplace search/browse card item */
+export interface SearchProductItem extends VendorProductCardItem {}
+
 export interface CategoryBrowseResult {
-  products: CategoryProductItem[];
+  products: VendorProductCardItem[];
   total: number;
   filters: CategoryBrowseFilters;
   facets: {
@@ -338,11 +409,17 @@ export interface CategoryBrowseResult {
 }
 
 export interface SearchResult {
-  products: Product[];
+  products: SearchProductItem[];
   total: number;
   filters: SearchFilters;
   categories: Category[];
   brands: Brand[];
+  facets: {
+    brands: BrandFacet[];
+    priceRange: { min: number; max: number };
+    attributes: AttributeFacet[];
+  };
+  dominantCategoryId?: string;
 }
 
 export interface AdminStats {

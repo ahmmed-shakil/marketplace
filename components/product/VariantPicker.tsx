@@ -17,7 +17,7 @@ export function VariantPicker({ variants, selected, onSelect }: { variants: Prod
             className={cn(
               "rounded-md border px-3 py-2 text-[13px] font-semibold transition-all",
               selected === v.id
-                ? "border-[#1877f2] bg-[#e7f3ff] text-[#1877f2]"
+                ? "border-primary bg-accent-light text-primary"
                 : "border-[#dadde1] bg-white text-[#050505] hover:bg-[#f0f2f5]"
             )}
           >

@@ -23,7 +23,7 @@ export function MobileNav() {
         {links.map(({ href, icon: Icon, label }) => {
           const active = pathname === href || (href !== "/" && pathname.startsWith(href));
           return (
-            <Link key={href} href={href} className={cn("flex flex-col items-center gap-0.5 px-2 py-1", active ? "text-[#1877f2]" : "text-[#65676b]")}>
+            <Link key={href} href={href} className={cn("flex flex-col items-center gap-0.5 px-2 py-1", active ? "text-primary" : "text-[#65676b]")}>
               <Icon className={cn("h-6 w-6", active && "stroke-[2.5]")} />
               <span className="text-[10px] font-semibold">{label}</span>
             </Link>

@@ -14,7 +14,7 @@ export default function LoginPage() {
       {/* Left — Facebook-style brand panel */}
       <div className="hidden lg:flex flex-col justify-center px-16 mesh-bg hero-pattern">
         <div className="flex items-center gap-3">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-3xl font-bold text-[#1877f2]">M</div>
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-3xl font-bold text-primary">M</div>
           <span className="text-4xl font-bold text-white">Market</span>
         </div>
         <p className="mt-6 max-w-md text-2xl font-normal leading-snug text-white">
@@ -48,7 +48,7 @@ export default function LoginPage() {
               <Button variant="secondary" className="w-full" size="md">Create New Account</Button>
             </Link>
             <p className="mt-4 text-center text-sm">
-              <Link href="/vendor-signup" className="font-semibold fb-text hover:underline">List your store for free</Link>
+              <Link href="/vendor-signup" className="font-semibold text-primary hover:underline">List your store for free</Link>
             </p>
           </div>
         </PageTransition>

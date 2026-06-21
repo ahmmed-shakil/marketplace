@@ -9,26 +9,27 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { SectionHeader } from "@/components/ui/Display";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
-import { getFeaturedProducts, getAllComparisons, getAllGuides, getNearbyVendors } from "@/lib/mock";
+import { getFeaturedVendorProducts, getAllComparisons, getAllGuides, getNearbyVendors, enrichVendorProductForCard } from "@/lib/mock";
 import { getTopCategories, getDepartmentCount, getTotalCategoryCount } from "@/lib/mock/categories";
+import { getActiveVendorCount } from "@/lib/mock/vendors";
 import { getCategoryIcon } from "@/lib/category-icons";
 import { MotionCard } from "@/components/motion";
-import { products } from "@/lib/mock/products";
+import { getVendorProductCount } from "@/lib/mock/vendor-products";
 
 const heroStats = [
-  { value: "10K+", label: "Products" },
-  { value: "100+", label: "Active Vendors" },
+  { value: `${getVendorProductCount()}+`, label: "Listings" },
+  { value: `${getActiveVendorCount()}+`, label: "Active Vendors" },
   { value: `${getDepartmentCount()}`, label: "Departments" },
   { value: `${getTotalCategoryCount()}+`, label: "Subcategories" },
 ];
 
 export default function HomePage() {
-  const featured = getFeaturedProducts();
+  const featured = getFeaturedVendorProducts().map(enrichVendorProductForCard);
   const categories = getTopCategories();
   const comparisons = getAllComparisons();
   const guides = getAllGuides();
   const vendors = getNearbyVendors(4);
-  const trending = products.filter((p) => p.rating >= 4.5).slice(0, 4);
+  const trending = getFeaturedVendorProducts(8).slice(4, 8).map(enrichVendorProductForCard);
 
   return (
     <PageTransition>
@@ -90,8 +91,8 @@ export default function HomePage() {
             return (
               <MotionDiv key={cat.id} delay={i * 0.02}>
                 <Link href={`/categories/${cat.slug}`} className="group block">
-                  <div className="fb-card flex flex-col items-center p-4 text-center transition-all group-hover:border-[#1877f2]">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#e7f3ff] text-[#1877f2] transition-colors group-hover:fb-primary group-hover:text-white">
+                  <div className="fb-card flex flex-col items-center p-4 text-center transition-all group-hover:border-primary">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent-light text-primary transition-colors group-hover:bg-primary group-hover:text-white">
                       <Icon className="h-6 w-6" />
                     </div>
                     <p className="mt-3 text-[13px] font-semibold leading-tight text-[#050505]">{cat.name}</p>
@@ -134,7 +135,7 @@ export default function HomePage() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {featured.map((p, i) => (
             <MotionDiv key={p.id} delay={i * 0.05}>
-              <ProductCard product={p} featured={i < 2} />
+              <ProductCard product={p} featured={i < 2} variantSummary={p.variantSummary} />
             </MotionDiv>
           ))}
         </div>
@@ -145,7 +146,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 lg:px-6">
           <SectionHeader title="Top Rated" subtitle="Highest rated by users and experts" />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {trending.map((p) => <ProductCard key={p.id} product={p} />)}
+            {trending.map((p) => <ProductCard key={p.id} product={p} variantSummary={p.variantSummary} />)}
           </div>
         </div>
       </section>
@@ -157,13 +158,13 @@ export default function HomePage() {
           {comparisons.map((c) => (
             <Link key={c.id} href={`/compare?ids=${c.productIds.join(",")}`}>
               <MotionCard className="fb-card flex gap-4 p-5">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#e7f3ff]">
-                  <GitCompare className="h-7 w-7 text-[#1877f2]" />
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent-light">
+                  <GitCompare className="h-7 w-7 text-primary" />
                 </div>
                 <div>
                   <h3 className="font-bold text-[#050505]">{c.title}</h3>
                   <p className="mt-1 text-[15px] text-[#65676b]">{c.summary}</p>
-                  <span className="mt-2 inline-block text-sm font-semibold fb-text">View comparison →</span>
+                  <span className="mt-2 inline-block text-sm font-semibold text-primary">View comparison →</span>
                 </div>
               </MotionCard>
             </Link>
@@ -179,8 +180,8 @@ export default function HomePage() {
             {guides.map((g) => (
               <Link key={g.id} href={`/guides/${g.slug}`}>
                 <MotionCard className="fb-card overflow-hidden">
-                  <div className="relative h-44 bg-[#1877f2]">
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1877f2] to-[#42b72a]/30 opacity-60" />
+                  <div className="relative h-44 bg-primary">
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary to-[#42b72a]/30 opacity-60" />
                     <div className="absolute bottom-4 left-4 right-4">
                       <Badge className="bg-white/20 text-white">{g.budgetLabel}</Badge>
                       <h3 className="mt-2 text-lg font-bold text-white leading-snug">{g.title}</h3>
@@ -206,8 +207,8 @@ export default function HomePage() {
             { icon: BarChart3, title: "Real Availability", desc: "Live stock and pricing from local vendors." },
           ].map(({ icon: Icon, title, desc }) => (
             <div key={title} className="flex gap-4">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#e7f3ff]">
-                <Icon className="h-5 w-5 text-[#1877f2]" />
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent-light">
+                <Icon className="h-5 w-5 text-primary" />
               </div>
               <div>
                 <h3 className="font-bold text-[#050505]">{title}</h3>
@@ -219,14 +220,14 @@ export default function HomePage() {
       </section>
 
       {/* Vendors */}
-      <section className="bg-[#1877f2] py-12">
+      <section className="bg-primary py-12">
         <div className="mx-auto max-w-7xl px-4 lg:px-6">
           <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
             <div>
               <h2 className="text-2xl font-bold text-white">Nearby Vendors</h2>
               <p className="mt-1 text-blue-100">Find sellers with real stock near you</p>
             </div>
-            <Link href="/vendors"><Button className="bg-white text-[#1877f2] hover:bg-blue-50">View all vendors</Button></Link>
+            <Link href="/vendors"><Button className="bg-white text-primary hover:bg-blue-50">View all vendors</Button></Link>
           </div>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {vendors.map((v) => (
@@ -252,7 +253,7 @@ export default function HomePage() {
       {/* Community CTA */}
       <section className="mx-auto max-w-7xl px-4 py-12 lg:px-6">
         <div className="fb-card flex flex-col items-center rounded-lg p-10 text-center">
-          <Users className="h-12 w-12 text-[#1877f2]" />
+          <Users className="h-12 w-12 text-primary" />
           <h2 className="mt-4 text-2xl font-bold text-[#050505]">Join the Market community</h2>
           <p className="mt-2 max-w-md text-[15px] text-[#65676b]">
             Create a free account to save products, write reviews, and get price alerts when items drop.
